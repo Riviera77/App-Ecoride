@@ -1,0 +1,69 @@
+CREATE TABLE customer(
+   Id_customer SERIAL,
+   email VARCHAR(50),
+   username VARCHAR(50),
+   password VARCHAR(50),
+   photo ,
+   PRIMARY KEY(Id_customer)
+);
+
+CREATE TABLE credit(
+   Id_credit SERIAL,
+   balance INTEGER,
+   transaction_date TIMESTAMP,
+   Id_customer INTEGER NOT NULL,
+   PRIMARY KEY(Id_credit),
+   FOREIGN KEY(Id_customer) REFERENCES customer(Id_customer)
+);
+
+CREATE TABLE role(
+   Id_role SERIAL,
+   description VARCHAR(50),
+   PRIMARY KEY(Id_role)
+);
+
+CREATE TABLE car(
+   Id_car SERIAL,
+   registration VARCHAR(50),
+   date_first_registration VARCHAR(50),
+   model VARCHAR(50),
+   colour VARCHAR(50),
+   mark VARCHAR(50),
+   energy VARCHAR(50),
+   number_seats INTEGER,
+   preference VARCHAR(50),
+   Id_customer INTEGER NOT NULL,
+   PRIMARY KEY(Id_car),
+   FOREIGN KEY(Id_customer) REFERENCES customer(Id_customer)
+);
+
+CREATE TABLE carpooling(
+   Id_carpooling SERIAL,
+   departure_address VARCHAR(50),
+   arrival_address VARCHAR(50),
+   departure_date DATE,
+   arrival_date DATE,
+   price NUMERIC(15,2),
+   departure_time TIME,
+   arrival_time TIME,
+   status VARCHAR(50),
+   Id_car INTEGER NOT NULL,
+   PRIMARY KEY(Id_carpooling),
+   FOREIGN KEY(Id_car) REFERENCES car(Id_car)
+);
+
+CREATE TABLE customer_role(
+   Id_customer INTEGER,
+   Id_role INTEGER,
+   PRIMARY KEY(Id_customer, Id_role),
+   FOREIGN KEY(Id_customer) REFERENCES customer(Id_customer),
+   FOREIGN KEY(Id_role) REFERENCES role(Id_role)
+);
+
+CREATE TABLE customer_carpooling(
+   Id_carpooling INTEGER,
+   Id_customer INTEGER,
+   PRIMARY KEY(Id_carpooling, Id_customer),
+   FOREIGN KEY(Id_carpooling) REFERENCES carpooling(Id_carpooling),
+   FOREIGN KEY(Id_customer) REFERENCES customer(Id_customer)
+);
