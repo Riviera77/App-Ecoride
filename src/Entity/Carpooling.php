@@ -49,6 +49,12 @@ class Carpooling
     #[ORM\ManyToOne(inversedBy: 'carpoolings')]
     private ?Car $car = null;
 
+    #[ORM\Column]
+    private ?int $numberSeats = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $preferences = null;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -187,6 +193,30 @@ class Carpooling
     public function setCar(?Car $car): static
     {
         $this->car = $car;
+
+        return $this;
+    }
+
+    public function getNumberSeats(): ?int
+    {
+        return $this->numberSeats;
+    }
+
+    public function setNumberSeats(int $numberSeats): static
+    {
+        $this->numberSeats = $numberSeats;
+
+        return $this;
+    }
+
+    public function getPreferences(): ?string
+    {
+        return $this->preferences;
+    }
+
+    public function setPreferences(?string $preferences): static
+    {
+        $this->preferences = $preferences;
 
         return $this;
     }

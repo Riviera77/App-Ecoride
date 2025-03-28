@@ -33,12 +33,6 @@ class Car
     #[ORM\Column(length: 50)]
     private ?string $energy = null;
 
-    #[ORM\Column]
-    private ?int $numberSeats = null;
-
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $preference = null;
-
     /**
      * @var Collection<int, Carpooling>
      */
@@ -126,30 +120,6 @@ class Car
     public function setEnergy(string $energy): static
     {
         $this->energy = $energy;
-
-        return $this;
-    }
-
-    public function getNumberSeats(): ?int
-    {
-        return $this->numberSeats;
-    }
-
-    public function setNumberSeats(int $numberSeats): static
-    {
-        $this->numberSeats = $numberSeats;
-
-        return $this;
-    }
-
-    public function getPreference(): ?string
-    {
-        return $this->preference;
-    }
-
-    public function setPreference(?string $preference): static
-    {
-        $this->preference = $preference;
 
         return $this;
     }
